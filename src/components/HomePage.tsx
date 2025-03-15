@@ -22,8 +22,19 @@ const HomePage: React.FC = () => {
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
 
+  // Close menu when clicking on a link
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    document.body.classList.remove('menu-open');
+  };
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
   };
 
   const toggleFaq = (index: number) => {
@@ -60,13 +71,30 @@ const HomePage: React.FC = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (isMenuOpen && !(event.target as Element).closest('.navbar-menu') && 
           !(event.target as Element).closest('.navbar-toggle')) {
-        setIsMenuOpen(false);
+        closeMenu();
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
+    
+    // Clean up event listener and body class when component unmounts
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.body.classList.remove('menu-open');
+    };
+  }, [isMenuOpen]);
+
+  // Close menu on window resize (if desktop size is reached)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768 && isMenuOpen) {
+        closeMenu();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
     };
   }, [isMenuOpen]);
 
@@ -281,14 +309,14 @@ const HomePage: React.FC = () => {
           
           <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
             <ul className="navbar-items">
-              <li className="navbar-item"><a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a></li>
-              <li className="navbar-item"><a href="#testimonials" onClick={() => setIsMenuOpen(false)}>Testimonials</a></li>
-              <li className="navbar-item"><a href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</a></li>
-              <li className="navbar-item"><a href="#faq" onClick={() => setIsMenuOpen(false)}>FAQ</a></li>
+              <li className="navbar-item"><a href="#features" onClick={closeMenu}>Features</a></li>
+              <li className="navbar-item"><a href="#testimonials" onClick={closeMenu}>Testimonials</a></li>
+              <li className="navbar-item"><a href="#pricing" onClick={closeMenu}>Pricing</a></li>
+              <li className="navbar-item"><a href="#faq" onClick={closeMenu}>FAQ</a></li>
             </ul>
             <div className="navbar-buttons">
-              <a href="/coming-soon" className="navbar-button login">Log In</a>
-              <a href="/coming-soon" className="navbar-button signup">Sign Up</a>
+              <a href="/coming-soon" className="navbar-button login" onClick={closeMenu}>Log In</a>
+              <a href="/coming-soon" className="navbar-button signup" onClick={closeMenu}>Sign Up</a>
             </div>
           </div>
           
