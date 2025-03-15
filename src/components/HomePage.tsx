@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, TouchEvent } from 'react';
+import { Link } from 'react-router-dom';
 import './HomePage.css';
 
 // Define types for our notification data
@@ -315,8 +316,8 @@ const HomePage: React.FC = () => {
               <li className="navbar-item"><a href="#faq" onClick={closeMenu}>FAQ</a></li>
             </ul>
             <div className="navbar-buttons">
-              <a href="/coming-soon" className="navbar-button login" onClick={closeMenu}>Log In</a>
-              <a href="/coming-soon" className="navbar-button signup" onClick={closeMenu}>Sign Up</a>
+              <Link to="/coming-soon" className="navbar-button login" onClick={closeMenu}>Log In</Link>
+              <Link to="/coming-soon" className="navbar-button signup" onClick={closeMenu}>Sign Up</Link>
             </div>
           </div>
           
@@ -335,8 +336,8 @@ const HomePage: React.FC = () => {
             <h1 className="hero-title">Turn Your Skills Into Income</h1>
             <p className="hero-tagline">Your AI sidekick that helps you launch, manage, and grow your side hustle with ease</p>
             <div className="hero-cta">
-              <button className="primary-button">Start Earning Today</button>
-              <button className="secondary-button">See How It Works</button>
+              <Link to="/coming-soon" className="primary-button">Start Earning Today</Link>
+              <Link to="/coming-soon" className="secondary-button">See How It Works</Link>
             </div>
           </div>
           <div className="hero-image">
@@ -621,7 +622,7 @@ const HomePage: React.FC = () => {
                 </li>
               </ul>
             </div>
-            <button className="pricing-button">Get Started</button>
+            <Link to="/coming-soon" className="pricing-button">Get Started</Link>
           </div>
           
           <div className="pricing-card popular">
@@ -681,7 +682,7 @@ const HomePage: React.FC = () => {
                 </li>
               </ul>
             </div>
-            <button className="pricing-button popular-button">Get Started</button>
+            <Link to="/coming-soon" className="pricing-button popular-button">Get Started</Link>
           </div>
         </div>
         
