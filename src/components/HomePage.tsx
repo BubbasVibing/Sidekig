@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, TouchEvent } from 'react';
 import './HomePage.css';
 
 // Define types for our notification data
@@ -19,6 +19,8 @@ const HomePage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const testimonialRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,6 +29,46 @@ const HomePage: React.FC = () => {
   const toggleFaq = (index: number) => {
     setActiveFaq(activeFaq === index ? null : index);
   };
+
+  // Handle touch events for testimonial carousel
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
+    if (touchStartX === null) return;
+    
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
+    
+    // Swipe threshold of 50px
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe left, go to next
+        setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+      } else {
+        // Swipe right, go to previous
+        setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+      }
+    }
+    
+    setTouchStartX(null);
+  };
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMenuOpen && !(event.target as Element).closest('.navbar-menu') && 
+          !(event.target as Element).closest('.navbar-toggle')) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   // Testimonial data
   const testimonials = [
@@ -211,10 +253,10 @@ const HomePage: React.FC = () => {
           
           <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
             <ul className="navbar-items">
-              <li className="navbar-item"><a href="#features">Features</a></li>
-              <li className="navbar-item"><a href="#testimonials">Testimonials</a></li>
-              <li className="navbar-item"><a href="#pricing">Pricing</a></li>
-              <li className="navbar-item"><a href="#faq">FAQ</a></li>
+              <li className="navbar-item"><a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a></li>
+              <li className="navbar-item"><a href="#testimonials" onClick={() => setIsMenuOpen(false)}>Testimonials</a></li>
+              <li className="navbar-item"><a href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</a></li>
+              <li className="navbar-item"><a href="#faq" onClick={() => setIsMenuOpen(false)}>FAQ</a></li>
             </ul>
             <div className="navbar-buttons">
               <a href="/coming-soon" className="navbar-button login">Log In</a>
@@ -222,7 +264,7 @@ const HomePage: React.FC = () => {
             </div>
           </div>
           
-          <div className="navbar-toggle" onClick={toggleMenu}>
+          <div className="navbar-toggle" onClick={toggleMenu} aria-label="Toggle navigation menu">
             <div className={`toggle-bar ${isMenuOpen ? 'open' : ''}`}></div>
             <div className={`toggle-bar ${isMenuOpen ? 'open' : ''}`}></div>
             <div className={`toggle-bar ${isMenuOpen ? 'open' : ''}`}></div>
@@ -381,7 +423,12 @@ const HomePage: React.FC = () => {
       {/* Testimonials Section with Carousel */}
       <div className="testimonials-section" id="testimonials">
         <h2>What Our Users Say</h2>
-        <div className="testimonial-carousel">
+        <div 
+          className="testimonial-carousel" 
+          ref={testimonialRef}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="testimonial-container" style={{ transform: `translateX(-${activeTestimonial * 100}%)` }}>
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="testimonial-slide">

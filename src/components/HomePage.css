@@ -893,6 +893,7 @@
   }
 }
 
+/* Tablet and large mobile devices */
 @media (max-width: 768px) {
   .navbar-menu {
     position: fixed;
@@ -907,6 +908,7 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 0;
     gap: 0;
+    z-index: 1001;
   }
   
   .navbar-menu.active {
@@ -960,6 +962,7 @@
   .hero-cta {
     flex-direction: column;
     align-items: center;
+    gap: 15px;
   }
   
   .home-footer {
@@ -992,6 +995,7 @@
   .features-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    padding: 0 20px;
   }
   
   .feature-card {
@@ -1012,16 +1016,142 @@
     padding: 10px 14px;
     height: 85px;
   }
+  
+  .pricing-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .pricing-card {
+    width: 90%;
+    max-width: 450px;
+  }
+  
+  .pricing-card.popular {
+    transform: scale(1);
+    order: -1;
+    margin-bottom: 30px;
+  }
+  
+  .pricing-card.popular:hover {
+    transform: translateY(-10px);
+  }
+  
+  .testimonial-card {
+    padding: 30px 20px;
+  }
+  
+  .testimonial-text {
+    font-size: 1rem;
+  }
+  
+  .carousel-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .testimonial-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .secondary-button {
+    margin-left: 0;
+  }
 }
 
+/* iPhone and Samsung specific adjustments */
+@media (max-width: 576px) {
+  .hero-section {
+    padding: 100px 15px 80px;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .hero-tagline {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+  
+  .hero-illustration {
+    height: 520px;
+    margin-top: 150px;
+  }
+  
+  .iphone {
+    width: 230px;
+    height: 470px;
+    border-radius: 35px;
+  }
+  
+  .iphone-screen {
+    border-radius: 25px;
+  }
+  
+  .primary-button, .secondary-button {
+    padding: 12px 30px;
+    font-size: 0.95rem;
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .features-section, 
+  .testimonials-section, 
+  .pricing-section, 
+  .faq-section {
+    padding: 60px 15px;
+  }
+  
+  .features-section h2,
+  .testimonials-section h2,
+  .pricing-section h2,
+  .faq-section h2 {
+    font-size: 2.2rem;
+  }
+  
+  .pricing-subtitle,
+  .faq-subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .pricing-card {
+    padding: 30px 20px;
+    width: 100%;
+  }
+  
+  .price {
+    font-size: 3rem;
+  }
+  
+  .faq-question h4 {
+    font-size: 0.95rem;
+  }
+  
+  .faq-answer p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small iPhone and Samsung devices */
 @media (max-width: 480px) {
   .hero-illustration {
-    height: 500px;
+    height: 480px;
+    margin-top: 120px;
   }
 
   .iphone {
     width: 220px;
     height: 450px;
+    border-radius: 32px;
+  }
+  
+  .iphone-screen {
+    border-radius: 22px;
   }
 
   .iphone-notification {
@@ -1030,10 +1160,12 @@
 
   .notification-app {
     padding: 8px 12px;
+    height: 38px;
   }
 
   .notification-content {
     padding: 8px 12px;
+    height: 90px;
   }
 
   .notification-title {
@@ -1046,6 +1178,7 @@
 
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
   }
   
   .feature-card {
@@ -1055,9 +1188,137 @@
   .features-section h2 {
     font-size: 2rem;
   }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-tagline {
+    font-size: 1rem;
+  }
+  
+  .navbar-container {
+    height: 60px;
+    padding: 0 15px;
+  }
+  
+  .logo-text {
+    font-size: 1.6rem;
+  }
+  
+  .navbar-menu {
+    top: 60px;
+  }
+  
+  .testimonial-avatar {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .testimonial-card {
+    padding: 25px 15px;
+  }
+  
+  .testimonial-text {
+    font-size: 0.95rem;
+  }
+  
+  .carousel-arrow {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .pricing-guarantee {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .pricing-guarantee svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .faq-contact-button {
+    padding: 12px 25px;
+    font-size: 0.95rem;
+  }
+}
 
+/* Very small devices (iPhone SE, Galaxy S8, etc.) */
+@media (max-width: 375px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-tagline {
+    font-size: 0.95rem;
+  }
+  
+  .hero-illustration {
+    height: 450px;
+    margin-top: 100px;
+  }
+  
+  .iphone {
+    width: 200px;
+    height: 410px;
+    border-radius: 30px;
+  }
+  
+  .iphone-screen {
+    border-radius: 20px;
+  }
+  
+  .primary-button, .secondary-button {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .features-section h2,
+  .testimonials-section h2,
+  .pricing-section h2,
+  .faq-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.4rem;
+  }
+  
+  .feature-card p {
+    font-size: 0.95rem;
+  }
+  
+  .pricing-card {
+    padding: 25px 15px;
+  }
+  
+  .pricing-header h3 {
+    font-size: 1.6rem;
+  }
+  
+  .price {
+    font-size: 2.8rem;
+  }
+  
+  .pricing-features li {
+    font-size: 0.9rem;
+  }
+  
+  .pricing-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  .stream-notification {
+    height: 150px;
+  }
+  
+  .notification-app {
+    height: 36px;
+  }
+  
   .notification-content {
-    padding: 8px 12px;
     height: 85px;
   }
 }
@@ -1385,21 +1646,59 @@
   }
 }
 
+@media (max-width: 576px) {
+  .stream-notification {
+    height: 155px;
+    width: calc(100% - 14px);
+    margin: 0 7px;
+  }
+  
+  .notification-app {
+    padding: 9px 13px;
+    height: 40px;
+  }
+  
+  .notification-content {
+    padding: 11px 13px;
+    height: 100px;
+  }
+  
+  @keyframes streamDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    90% {
+      transform: translateY(calc(100vh - 380px));
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(calc(100vh - 360px));
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
 @media (max-width: 480px) {
   .stream-notification {
-    height: 160px; /* Match desktop */
+    height: 150px;
     width: calc(100% - 12px);
     margin: 0 6px;
   }
   
   .notification-app {
     padding: 8px 12px;
-    height: 42px; /* Match desktop */
+    height: 38px;
   }
   
   .notification-content {
     padding: 10px 12px;
-    height: 104px; /* Match desktop */
+    height: 95px;
   }
   
   .notification-title {
@@ -1421,11 +1720,60 @@
       opacity: 1;
     }
     90% {
-      transform: translateY(calc(100vh - 410px)); /* Adjusted for taller notifications */
+      transform: translateY(calc(100vh - 410px));
       opacity: 1;
     }
     100% {
-      transform: translateY(calc(100vh - 390px)); /* Adjusted for taller notifications */
+      transform: translateY(calc(100vh - 390px));
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+}
+
+/* iPhone SE, Galaxy S8, etc. */
+@media (max-width: 375px) {
+  .stream-notification {
+    height: 140px;
+    width: calc(100% - 10px);
+    margin: 0 5px;
+  }
+  
+  .notification-app {
+    padding: 7px 10px;
+    height: 36px;
+  }
+  
+  .notification-content {
+    padding: 8px 10px;
+    height: 90px;
+  }
+  
+  .notification-title {
+    font-size: 13px;
+    max-width: 60%;
+  }
+  
+  .notification-body p {
+    font-size: 12px;
+    -webkit-line-clamp: 3;
+  }
+  
+  @keyframes streamDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    90% {
+      transform: translateY(calc(100vh - 430px));
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(calc(100vh - 410px));
       opacity: 0;
       visibility: hidden;
     }
