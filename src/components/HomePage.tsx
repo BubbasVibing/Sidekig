@@ -302,67 +302,69 @@ const HomePage: React.FC = () => {
 
       {/* Enhanced Hero Section */}
       <div className="hero-section" id="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">Turn Your Skills Into Income</h1>
-          <p className="hero-tagline">Your AI sidekick that helps you launch, manage, and grow your side hustle with ease</p>
-          <div className="hero-cta">
-            <button className="primary-button">Start Earning Today</button>
-            <button className="secondary-button">See How It Works</button>
+        <div className="hero-container">
+          <div className="hero-content">
+            <h1 className="hero-title">Turn Your Skills Into Income</h1>
+            <p className="hero-tagline">Your AI sidekick that helps you launch, manage, and grow your side hustle with ease</p>
+            <div className="hero-cta">
+              <button className="primary-button">Start Earning Today</button>
+              <button className="secondary-button">See How It Works</button>
+            </div>
           </div>
-        </div>
-        <div className="hero-image">
-          <div className="hero-image-container">
-            <div className="hero-illustration">
-              <div className="hand"></div>
-              <div className="iphone">
-                <div className="iphone-notch"></div>
-                <div className="iphone-screen">
-                  <div className="iphone-status-bar">
-                    <div className="status-time">9:41</div>
-                    <div className="status-icons">
-                      <span className="signal-icon">📶</span>
-                      <span className="wifi-icon">📡</span>
-                      <span className="battery-icon">🔋</span>
-                    </div>
-                  </div>
-                  
-                  <div className="notification-stream">
-                    {infiniteNotifications.map((notification) => (
-                      <div 
-                        key={notification.id} 
-                        className={`stream-notification stream-${notification.type}`}
-                        style={{ 
-                          animationDelay: `${notification.delay}s`,
-                          animationIterationCount: 'infinite',
-                          zIndex: 20 - (notification.delay % 20),
-                          height: notificationHeight
-                        }}
-                      >
-                        <div className="notification-app">
-                          <div 
-                            className="app-icon" 
-                            style={{ 
-                              backgroundColor: getIconColor(notification.type),
-                              width: window.innerWidth <= 375 ? '22px' : '28px',
-                              height: window.innerWidth <= 375 ? '22px' : '28px',
-                              minWidth: window.innerWidth <= 375 ? '22px' : '28px'
-                            }}
-                          >
-                            {notification.icon}
-                          </div>
-                          <div className="app-name">{notification.name}</div>
-                        </div>
-                        <div className="notification-content">
-                          <div className="notification-header">
-                            <span className="notification-title">{notification.title}</span>
-                            <span className="notification-time">now</span>
-                          </div>
-                          <div className="notification-body">
-                            <p><strong>{notification.message}</strong></p>
-                          </div>
-                        </div>
+          <div className="hero-image">
+            <div className="hero-image-container">
+              <div className="hero-illustration">
+                <div className="hand"></div>
+                <div className="iphone">
+                  <div className="iphone-notch"></div>
+                  <div className="iphone-screen">
+                    <div className="iphone-status-bar">
+                      <div className="status-time">9:41</div>
+                      <div className="status-icons">
+                        <span className="signal-icon">📶</span>
+                        <span className="wifi-icon">📡</span>
+                        <span className="battery-icon">🔋</span>
                       </div>
-                    ))}
+                    </div>
+                    
+                    <div className="notification-stream">
+                      {infiniteNotifications.map((notification) => (
+                        <div 
+                          key={notification.id} 
+                          className={`stream-notification stream-${notification.type}`}
+                          style={{ 
+                            animationDelay: `${notification.delay}s`,
+                            animationIterationCount: 'infinite',
+                            zIndex: 20 - (notification.delay % 20),
+                            height: notificationHeight
+                          }}
+                        >
+                          <div className="notification-app">
+                            <div 
+                              className="app-icon" 
+                              style={{ 
+                                backgroundColor: getIconColor(notification.type),
+                                width: window.innerWidth <= 375 ? '22px' : '28px',
+                                height: window.innerWidth <= 375 ? '22px' : '28px',
+                                minWidth: window.innerWidth <= 375 ? '22px' : '28px'
+                              }}
+                            >
+                              {notification.icon}
+                            </div>
+                            <div className="app-name">{notification.name}</div>
+                          </div>
+                          <div className="notification-content">
+                            <div className="notification-header">
+                              <span className="notification-title">{notification.title}</span>
+                              <span className="notification-time">now</span>
+                            </div>
+                            <div className="notification-body">
+                              <p><strong>{notification.message}</strong></p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -451,6 +453,7 @@ const HomePage: React.FC = () => {
       {/* Testimonials Section with Carousel */}
       <div className="testimonials-section" id="testimonials">
         <h2>What Our Users Say</h2>
+        <p className="testimonial-subtitle">Real stories from real people who have transformed their skills into thriving side hustles</p>
         <div 
           className="testimonial-carousel" 
           ref={testimonialRef}
