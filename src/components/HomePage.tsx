@@ -242,6 +242,34 @@ const HomePage: React.FC = () => {
     }
   };
 
+  // Function to determine notification height based on screen width
+  const getNotificationHeight = (): string => {
+    if (window.innerWidth <= 375) {
+      return '110px';
+    } else if (window.innerWidth <= 480) {
+      return '120px';
+    } else if (window.innerWidth <= 576) {
+      return '130px';
+    } else {
+      return '160px';
+    }
+  };
+
+  // State to track notification height
+  const [notificationHeight, setNotificationHeight] = useState(getNotificationHeight());
+
+  // Update notification height on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setNotificationHeight(getNotificationHeight());
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="home-page">
       {/* Modern Navigation Bar */}
@@ -307,7 +335,7 @@ const HomePage: React.FC = () => {
                           animationDelay: `${notification.delay}s`,
                           animationIterationCount: 'infinite',
                           zIndex: 20 - (notification.delay % 20),
-                          height: '160px' // Updated from 135px to 160px to match CSS
+                          height: notificationHeight
                         }}
                       >
                         <div className="notification-app">
@@ -315,9 +343,9 @@ const HomePage: React.FC = () => {
                             className="app-icon" 
                             style={{ 
                               backgroundColor: getIconColor(notification.type),
-                              width: '28px', // CUSTOMIZE: Change icon size (match CSS)
-                              height: '28px', // CUSTOMIZE: Change icon size (match CSS)
-                              minWidth: '28px' // CUSTOMIZE: Change icon size (match CSS)
+                              width: window.innerWidth <= 375 ? '22px' : '28px',
+                              height: window.innerWidth <= 375 ? '22px' : '28px',
+                              minWidth: window.innerWidth <= 375 ? '22px' : '28px'
                             }}
                           >
                             {notification.icon}
